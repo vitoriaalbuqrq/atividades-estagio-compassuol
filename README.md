@@ -2,7 +2,7 @@
 Este repositório é destinado às atividades, resumos e aprendizados adquiridos durante meu estágio na CompassUOL.
 Cada seção será organizada em uma branch contendo os assuntos abordados. 
 
-## 📁 Section-01 - Noções básicas para trabalho em equipe e desenvolvimento ágil
+## 📁 Section-01: Noções básicas para trabalho em equipe e desenvolvimento ágil
 Nessa seção, são apresentados resumos sobre métodologias ágeis e os princípios do Scrum para a gestão ágil de projetos. Além disso, aborda as noções de como utilizar sistemas de versionamento de código e os fundamentos da segurança da informação.
 
 **Conteúdos**:
@@ -13,3 +13,14 @@ Nessa seção, são apresentados resumos sobre métodologias ágeis e os princí
 - [Conventional Commits](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/main/section-01/conventional-commits.md#conventional-commits)
 
 - [Fundamentos da Segurança da Informação](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/main/section-01/fundamentos-seguran%C3%A7a-informacao.md#fundamento-da-seguran%C3%A7a-da-informa%C3%A7%C3%A3o)
+
+
+## 📁 Section-02: Blockchain
+Nessa seção, são abordados os conceitos fundamentais da tecnologia blockchain e do bitcoin, os princípios e a estrutura de dados para o funcionamento.
+
+**Conteúdos**:
+- [Bitcoin e Blockchain - Conceitos Fundamentais](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/section-02/section-02/blockchain-bitcoin.md#-bitcoin-e-blockchain---conceitos-fundamentais)
+
+  - [Blockchain](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/section-02/section-02/blockchain-bitcoin.md#blockchain)
+  - [Bitcoin](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/section-02/section-02/blockchain-bitcoin.md#o-bitcoin)
+  - [Ethereum](https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol/blob/section-02/section-02/blockchain-bitcoin.md#o-ethereum)
