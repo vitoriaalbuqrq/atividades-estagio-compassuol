@@ -44,21 +44,16 @@ A blockchain é uma cadeia de blocos, onde cada bloco contém dados, como transa
 ### **Mineradores**
 São responsáveis por criar novos blocos e validar as transações recebidas. Eles competem entre si pelo direito de adicionar o próximo bloco na blockchain.
 
-- **Proof of Work**: É a prova de trabalho que os mineradores utilizam para provarem que trabalharam para encontrar esse bloco. Eles tentam encontrar um **Nonce** (número aleatório) que, ao ser combinado com os dados do bloco, gere um hash que esteja abaixo de um certo nível de dificuldade definido pela rede. O primeiro que encontrar um bloco cujo o HASH tenha um determinado numero de zero no começo, valida e é recompensado com bitcoins.
+- **Proof of Work**: É a prova de trabalho que os mineradores utilizam para provarem que trabalharam para encontrar esse bloco. Eles tentam encontrar um **Nonce** (número aleatório) que, ao ser combinado com os dados do bloco, gere um hash que esteja abaixo de um certo nível de dificuldade definido pela rede.
 
-<!-- - Ao ser encontrado, o bloco se tornar o proximo bloco da cadeia da blockchain do Bitcoin e os outros mineradores começam a minerar o bloco sequinte, construindo-o a partir do recém adicionado. -->
-
-- Mineradores ganham dinheiro principalmente por meio da **coinbase transaction**, além das tarifas de transação. O minerador que encontra um novo bloco tem o direito de incluir essa transação, criando um número definido de novos bitcoins, geralmente enviados para si mesmo. A quantidade de bitcoins gerada pela coinbase transaction é predeterminada e reduz pela metade a cada quatro anos. Inicialmente, eram 50 bitcoins por bloco, e o total de bitcoins está limitado a 21 milhões.
+- Mineradores ganham dinheiro principalmente por meio da **coinbase transaction**, além das tarifas de transação. O minerador que encontra um novo bloco tem o direito de incluir essa transação, criando um número definido de novos bitcoins, geralmente enviados para si mesmo.
 
 - **Mining Pools**: Pode ser muito custoso minerar sozinho, por isso existe as Mining Pools, grupos de mineradores coordenados por um nó central. O coordenador cria o bloco e os mineradores trabalham para encontrá-lo. Quando um bloco é descoberto, a recompensa é enviada ao coordenador, que a distribui entre os mineradores participantes.
 
 ### **Gasto Duplo**
-A mineração de bitcoins corresponde a 0,16% do total de eletricidade consumida mundialmente. Existe muitas críticas a respeito  do gasto de energia gerado com a mineração, muitas vezes é visto como algo inútil.
+O trabalho dos mineradores garante a segurança da rede Bitcoin, prevenindo o gasto duplo, onde alguém tenta usar a mesma quantia de bitcoins mais de uma vez. Antes do Bitcoin, esse problema era comum em moedas digitais. Graças ao Proof of Work, o Bitcoin impede essa fraude, pois é necessário algumas confirmações.
 
-- **Porque não é inútil?**
-
-  O trabalho dos mineradores garante a segurança da rede Bitcoin, prevenindo o gasto duplo, onde alguém tenta usar a mesma quantia de bitcoins mais de uma vez. Antes do Bitcoin, esse problema era comum em moedas digitais. Graças ao Proof of Work, o Bitcoin impede essa fraude, pois é necessário algumas confirmações.
-
+#### O que acontece se dois mineradores encontrarem o bloco ao mesmo tempo?
 É possível dois mineradores encontrarem o bloco ao mesmo tempo e gerar dois ramos na rede, porém a medida o ramo de blocos cresce, os mineradores percebem e seguem a regra de extenderem o ramo mais longo da blockchain, eliminando assim a biforcação e a cadeia continua linear.
 
 ## O Bitcoin na prática
@@ -66,23 +61,19 @@ A mineração de bitcoins corresponde a 0,16% do total de eletricidade consumida
 Ter bitcoins significa saber uma chave secreta que seja asssociada a uma chave pública para qual bitcoins estão apontando.
 
 ### **Carteiras**
-São métodos ou softwares que vão ajudar a guardar a chave secreta e também realizar transações usando bitcoins.
 
 - **Carteira de papel**: Papel com a chave pública e a chave secreta, cada carteira tem apenas um par CP/CS;
 
-- **Carteira de hardware**: Extremamente Seguras, interface seguras com computador, permite múltiplos pares de CP/CS;
+- **Carteira de hardware**: Extremamente seguras, interface seguras com computador e permite múltiplos pares de CP/CS;
 
 - **Carteira de Software**: É prático e tem vários serviços embutidos, recuperação de moedas, é mais arriscado e não recomendado para valores grandes.
 
 ### **Exchanges**
-A maneira mais tradicional e mais prática de negociar bitcoins é atraves de Exchanges.
-- Site onde o usuário cria um crédito, depositando dinheiro e usa esse dinheiro para comprar criptomoedas;
-
-- As Exchanges estão sujeitas e bastante visadas para ataques hackers;
+Exchanges são sistemas online onde o usuário cria um crédito, depositando dinheiro e usa esse dinheiro para comprar criptomoedas. É a maneira mais tradicional e mais prática de negociar bitcoins, porém as Exchanges estão sujeitas e bastante visadas para ataques hackers.
 
 ### **Anonimato**
 
-Pode ser fácil associar uma chave pública a uma identidade. Muitos serviços baseados em Bitcoin requerem sua identidade ou informações a seu respeito, como as Exchanges, carteiras, ao realizar compras. Por isso, o anonimato no Bitcoin não é tão absoluto quanto muitos acreditam. São necessário tomar algumas medidas de precaução importantes.
+Pode ser fácil associar uma chave pública a uma identidade. Muitos serviços baseados em Bitcoin requerem a identidade ou informações a respeito do usuário, como as Exchanges, carteiras, ao realizar compras. Por isso, o anonimato no Bitcoin não é tão absoluto quanto muitos acreditam. São necessário tomar algumas medidas de precaução.
 
 ## O Ethereum
 É uma moeda que agrega as funções do bitcoin e também incorporam a capacidade de realizar processamento.
