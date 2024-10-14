@@ -1,28 +1,28 @@
 # Simple Blockchain 
 Blockchain simples que permite a criação de transações e inclusão delas em blocos. Os blocos são inseridos na blockchain e em seguida é realizado uma validação para verificar sua integridade.
 
-## Pré-requisitos
+## 🛠️ Pré-requisitos
 É necessario ter o [Node.js](https://nodejs.org/) instalado para executar o projeto.
 
-## Configurações Iniciais
+## ⚙️ Configurações Iniciais
 
-1. Clone o repositório:
+1. Clone o repositório e acesse o diretório do projeto:
   ```bash
   git clone https://github.com/vitoriaalbuqrq/myBlockchain.git
   cd atividades/myBlockchain
   ```
-1. Instale as dependências:
+2. Instale as dependências:
   ```bash
   npm install
   ```
-  Será instalado a biblioteca `crypto-js` utilizada no projeto para gerar os hashes.
+  Será instalado a biblioteca `crypto-js` utilizada para gerar os hashes.
 
-## Execução
+## ▶️ Execução
 Para executar o código, use o comando:
 ```bash
 node index.js
 ```
-## Estrutura do códico:
+## 🗂️ Estrutura do códico
 - Class **Block**:
     Representa um bloco na blockchain contendo a posição do bloco na cadeia, o tempo de criação do bloco, o hash do bloco anterior, o hash gerado para o bloco atual e as transações (dados) armazenadas no bloco.
   
@@ -53,7 +53,7 @@ node index.js
             transactions: \n${transactions}`;
   }
   ```
-  - `generateHash()`: Gera o hash único para o bloco com base no timestamp, lastHash, data. Utiliza o algoritimo criptográfico SHA-256 através da lib **crypto-js**.
+  - `generateHash()`: Gera o hash único para o bloco com base no timestamp, lastHash, data. Utiliza o padrão **SHA-256** através da biblioteca **crypto-js**.
 
   ```javascript
   static generateHash(timestamp, lastHash, data) {
@@ -97,7 +97,7 @@ node index.js
       this.transactions.push(transaction);
     }
   ```
-  - `addBlock`: Cria um novo bloco com base nas propriedades do bloco, incluindo o hash do bloco anterior, o index, o timestamp e as transações atuais. O hash do novo bloco é calculado utilizando essas informações, o novo bloco é adicionado à blockchain, e a lista de transações é limpa:
+  - `addBlock`: Cria um novo bloco com base nas suas propriedades, incluindo o hash do bloco anterior, o index, o timestamp e as transações atuais. O hash do novo bloco é calculado utilizando essas informações, o novo bloco é adicionado à blockchain, e a lista de transações é limpa:
   ```javascript
     addBlock() {
       const lastBlock = this.blocks[this.blocks.length - 1]; 
@@ -113,7 +113,7 @@ node index.js
       this.transactions = []; //limpa as transações
     }
   ```
-  - `isValid`: Valida a integridade da blockchain percorrendo toda a lista de blocos e verificando se os blocos estão ligados entre si através dos hashes e se o hash de cada bloco foi gerado corretamente.
+  - `isValid`: Valida a integridade da blockchain percorrendo toda a lista de blocos, verificando se os blocos estão ligados entre si através dos hashes e se o hash de cada bloco foi gerado corretamente.
   ```javascript
       isValid() {
         for (let i = 1; i < this.blocks.length; i++) {
