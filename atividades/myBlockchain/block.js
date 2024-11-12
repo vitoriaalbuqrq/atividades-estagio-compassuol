@@ -1,27 +1,41 @@
-const SHA256 = require("crypto-js/sha256");
+const crypto = require("crypto");
 
 class Block {
-  constructor(index, timestamp, lastHash, hash, data = []) {
+  constructor(index, timestamp, lastHash = "", data = [], difficulty = 3) {
     this.index = index;
     this.timestamp = timestamp;
     this.lastHash = lastHash;
-    this.hash = hash; 
-    this.data = data; 
-  } 
+    this.data = data;
+    this.difficulty = difficulty;
+    this.nonce = 0;
+    this.mineBlock();
+  }
 
   toString() {
     const transactions = this.data.map(transaction => 
       `Sender: ${transaction.sender}, Receiver: ${transaction.receiver}, Amount: ${transaction.amount}`).join("\n");
     
     return `block: ${this.hash}
-            index: ${this.index}
+            nonce: ${this.nonce}
             lastHash: ${this.lastHash}
             timestamp: ${this.timestamp}
             transactions: \n${transactions}`;
   }
 
-  static generateHash(timestamp, lastHash, data) {
-    return SHA256(`${timestamp}${lastHash}${JSON.stringify(data)}`).toString();
+  generateHash() {
+    return crypto
+      .createHash("sha256")
+      .update(`${this.nonce}${this.timestamp}${this.lastHash}${JSON.stringify(this.data)}`)
+      .digest("hex");
+  }
+
+  mineBlock() {
+    this.hash = this.generateHash();
+
+    while (this.hash.substring(0, this.difficulty) !== "0".repeat(this.difficulty)) {
+      this.nonce++;
+      this.hash = this.generateHash();
+    }
   }
 }
 

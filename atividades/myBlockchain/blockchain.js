@@ -2,32 +2,47 @@ const Block = require('./block');
 
 class Blockchain {
   constructor() {
-    this.blocks = [this.createGenesisBlock()]; 
-    this.transactions = [];
+    this.blocks = [this.createGenesisBlock()];
+    this.pendingTransactions = [];
   }
 
   createGenesisBlock() {
-    const timestamp = Date.now(); 
-    const hash = Block.generateHash(timestamp, '0', []); 
-    return new Block(0, timestamp, '0', hash, []);
+    return new Block(0, Date.now(), []);
   }
 
   addTransaction(transaction) {
-    this.transactions.push(transaction);
+    this.pendingTransactions.push(transaction);
   }
 
-  addBlock() {
-    const lastBlock = this.blocks[this.blocks.length - 1]; 
+  createBlock() {
+    const lastBlock = this.blocks[this.blocks.length - 1];
     const lastHash = lastBlock.hash;
     const index = lastBlock.index + 1;
     const timestamp = Date.now();
-    const data = [...this.transactions];
-    const hash = Block.generateHash(timestamp, lastHash, data)
+    const data = [...this.pendingTransactions];
 
-    const newBlock = new Block(index, timestamp, lastHash, hash, data);
+    return new Block(index, timestamp, lastHash, data);
+  }
+
+  addBlock() {
+    const newBlock = this.createBlock();
     this.blocks.push(newBlock);
+    this.pendingTransactions = [];
+  }
 
-    this.transactions = []; //limpa as transações
+  getTransactionsByAddress(address) {
+    let history = { transactionsSent: [], transactionReceived: [] };
+
+    for (const block of this.blocks) {
+      for (const transaction of block.data) {
+        if (transaction.sender === address) {
+          history.transactionsSent.push(transaction);
+        } else if (transaction.receiver === address) {
+          history.transactionReceived.push(transaction);
+        }
+      }
+    }
+    return history;
   }
 
   isValid() {
@@ -38,13 +53,11 @@ class Blockchain {
       if (currentBlock.lastHash !== previousBlock.hash) {
         return false;
       }
-      const expectedHash = Block.generateHash(previousBlock.timestamp, previousBlock.lastHash, previousBlock.data);
-      if (currentBlock.lastHash !== expectedHash) {
+      if (currentBlock.lastHash !== previousBlock.generateHash()) {
         return false;
       }
     }
     return true;
   }
-
 }
-module.exports = Blockchain; 
+module.exports = Blockchain;
