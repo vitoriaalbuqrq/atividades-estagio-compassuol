@@ -11,7 +11,7 @@ Blockchain simples que permite a criação de transações e inclusão delas em 
 
 Clone o repositório e acesse o diretório do projeto:
   ```bash
-  git clone https://github.com/vitoriaalbuqrq/myBlockchain.git
+  git clone https://github.com/vitoriaalbuqrq/atividades-estagio-compassuol.git
   cd atividades/myBlockchain
   ```
 
