@@ -1,39 +1,49 @@
-const Blockchain = require('./blockchain');
 const Transaction = require('./transaction');
+const Node = require('./node'); 
 
-const myBlockchain = new Blockchain();
+
+const node1 = new Node(1);
+const node2 = new Node(2);
+const node3 = new Node(3);
 
 function main(){
-    console.log('\n--------------------------------- CRIANDO A BLOCKCHAIN ---------------------------------');
-    createTransactions();
-    displayBlockchain();
-    console.log('Blockchain é válida?', myBlockchain.isValid());
-    displayTransactionHistory('0x0012a536b1d9')
-    testBlockchainCorruption();
+    initializeNetwork()
+    displayBalances(node1);
+    console.log('\n--------------------------------------- BLOCKCHAIN --------------------------------------');
+    displayBlockchain(node1);
+    displayTransactionHistory('0x0012a536b1d9', node1)
 }
 
-function createTransactions(){
-    try {
-        myBlockchain.addTransaction(new Transaction('0x0012a536b1d9', '0x0045d9va80v6', 50));
-        myBlockchain.addTransaction(new Transaction('0x0012a536b1d9', '0x006325dsa253', 20));
-        myBlockchain.addBlock();
-        
-        myBlockchain.addTransaction(new Transaction('0x00df5d62fd13', '0x0012a536b1d9', 10));
-        myBlockchain.addBlock();
-    } catch (error){
-        console.log("Erro ao adicionar transação:", error.message);
-    }
+function initializeNetwork() {
+  
+    node1.connectNode(node2);
+    node1.connectNode(node3);
+    node2.connectNode(node1);
+    node2.connectNode(node3);
+    node3.connectNode(node1);
+    node3.connectNode(node2);
+  
+    const newBlock1 = node1.blockchain.minePendingTransactions('0x0012a536b1d9');
+    node1.sendBlock(newBlock1);
+    
+    const tx1 = new Transaction('0x0012a536b1d9', '0x0045d9va8b6f', 50);
+    const tx2 = new Transaction('0x0012a536b1d9', '0x0045d9va8b6f', 10);
+    node1.sendTransaction(tx1);
+    node1.sendTransaction(tx2);
+    
+    const newBlock2 = node2.blockchain.minePendingTransactions('0x006325d2e4fe');
+    node2.sendBlock(newBlock2);
 }
 
-function displayBlockchain(){
-    console.log(myBlockchain.blocks.map(block => block.toString())
+function displayBlockchain(node){
+    console.log(node.blockchain.chain.map(block => block.toString())
     .join("\n-----------------------------------------------------------------------------------------\n"));
     console.log('-----------------------------------------------------------------------------------------');
 }
 
-function displayTransactionHistory(address){
-    console.log('\n-------------------------------- HISTÓRICO DE TRANSAÇÕES --------------------------------');
-    const transactionHistory = myBlockchain.getTransactionsByAddress(address);
+function displayTransactionHistory(address, node){
+    console.log(`\n----------------- HISTÓRICO DE TRANSAÇÕES DO ENDEREÇO: ${address} -------------------`);
+    const transactionHistory = node.blockchain.getTransactionsByAddress(address);
 
     function displayTransactions(type, transactions){
         if (transactions.length > 0){
@@ -47,12 +57,14 @@ function displayTransactionHistory(address){
     }
     displayTransactions('enviadas', transactionHistory.transactionsSent);
     displayTransactions('recebidas', transactionHistory.transactionReceived);
+
 }
 
-function testBlockchainCorruption() {
-    console.log('Teste de alteração dos dados...');
-    myBlockchain.blocks[1].data[1].receiver = '0x005f682a36b7'; 
-    console.log('Blockchain válida após alteração?', myBlockchain.isValid());   
+function displayBalances(node) {
+    console.log(`SALDOS DOS ENDEREÇOS:`);
+    for (let address in node.blockchain.addressBalances) {
+        console.log(`Address: ${address} | Balance: ${node.blockchain.addressBalances[address]}`);
+    }
 }
 
 main();

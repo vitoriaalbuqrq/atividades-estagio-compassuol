@@ -1,14 +1,13 @@
 const crypto = require("crypto");
 
 class Block {
-  constructor(index, timestamp, lastHash = "", data = [], difficulty = 3) {
+  constructor(index, timestamp, lastHash = "", data = []) {
     this.index = index;
     this.timestamp = timestamp;
     this.lastHash = lastHash;
     this.data = data;
-    this.difficulty = difficulty;
     this.nonce = 0;
-    this.mineBlock();
+    this.hash = this.generateHash();
   }
 
   toString() {
@@ -29,10 +28,9 @@ class Block {
       .digest("hex");
   }
 
-  mineBlock() {
-    this.hash = this.generateHash();
+  mineBlock(difficulty) {
 
-    while (this.hash.substring(0, this.difficulty) !== "0".repeat(this.difficulty)) {
+    while (this.hash.substring(0, difficulty) !== "0".repeat(difficulty)) {
       this.nonce++;
       this.hash = this.generateHash();
     }
