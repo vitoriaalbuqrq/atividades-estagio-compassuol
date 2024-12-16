@@ -2,15 +2,15 @@ const Block = require('./block');
 const Transaction = require('./transaction');
 
 class Blockchain {
-  constructor() {
-    this.chain = [this.createGenesisBlock()];
+  constructor(genesisBlock) {
+    this.chain = [genesisBlock];
     this.pendingTransactions = [];
     this.difficulty = 3;
     this.miningReward = 100;
     this.addressBalances = {};
   }
 
-  createGenesisBlock() {
+  static createGenesisBlock() {
     return new Block(0, Date.now(), []);
   }
 
@@ -52,7 +52,7 @@ class Blockchain {
     }
 
     this.pendingTransactions = [];
-    this.miningReward = this.miningReward / 2;
+    this.miningReward /= 2;
 
     return block;
   }

@@ -1,9 +1,7 @@
-const Blockchain = require("./blockchain");
-
 class Node {
-  constructor(id) {
+  constructor(id, blockchain) {
     this.id = id;
-    this.blockchain = new Blockchain();
+    this.blockchain = blockchain;
     this.nodes = [];
   }
 
@@ -27,28 +25,37 @@ class Node {
     }
   }
 
-  receiveBlock(block) {    
-    if (this.blockchain.isValid()) {
-      let longestChain = this.blockchain.chain;
+  receiveBlock(block) {
+    const lastBlock = this.blockchain.getLatestBlock();
   
-      for (const node of this.nodes) {
-        if (node.blockchain.chain.length > longestChain.length) {
-          longestChain = node.blockchain.chain;
-        }
-      }
-
-      if (longestChain.length > this.blockchain.chain.length) {
-        this.resolveFork(longestChain);
-      } else {
-        this.blockchain.chain.push(block);
-        this.recalculateBalances();
-      }
-    } else {
-      console.log("Cadeia inválida.");
+    if (block.lastHash !== lastBlock.hash) {
+      console.log("Bloco inválido!");
+      this.resolveFork(this.getLongestChain());
+      return;
+    }
+  
+    this.blockchain.chain.push(block);
+    this.recalculateBalances();
+  
+    const longestChain = this.getLongestChain();  
+    if (longestChain.length > this.blockchain.chain.length) {
+      this.resolveFork(longestChain);
     }
   }
 
+  getLongestChain() {
+    let longestChain = this.blockchain.chain;
+  
+    for (const node of this.nodes) {
+      if (node.blockchain.chain.length > longestChain.length && node.blockchain.isValid()) {
+        longestChain = nodeChain;
+      }
+    }
+    return longestChain;
+  }
+
   resolveFork(longestChain) {
+    console.log("Resolvendo Fork...")
     this.blockchain.chain = [...longestChain];
     this.recalculateBalances();
   }

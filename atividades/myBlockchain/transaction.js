@@ -12,7 +12,7 @@ class Transaction {
   }
 
   isValidAddress(address) {
-    //Caso o endereço seja o da recompensa pode ser null
+    //Endereço do remetente null em caso de envio de recompensa
     if (address === null) {
       return true;
     }

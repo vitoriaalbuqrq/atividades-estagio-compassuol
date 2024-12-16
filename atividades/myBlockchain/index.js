@@ -1,16 +1,19 @@
 const Transaction = require('./transaction');
 const Node = require('./node'); 
+const Blockchain = require('./blockchain');
+const Block = require('./block');
 
+const genesisBlock = Blockchain.createGenesisBlock();
 
-const node1 = new Node(1);
-const node2 = new Node(2);
-const node3 = new Node(3);
+const node1 = new Node(1, new Blockchain(genesisBlock));
+const node2 = new Node(2, new Blockchain(genesisBlock));
+const node3 = new Node(3, new Blockchain(genesisBlock));
 
 function main(){
     initializeNetwork()
     displayBalances(node1);
     console.log('\n--------------------------------------- BLOCKCHAIN --------------------------------------');
-    displayBlockchain(node1);
+    displayBlockchain(node3);
     displayTransactionHistory('0x0012a536b1d9', node1)
 }
 
@@ -33,6 +36,9 @@ function initializeNetwork() {
     
     const newBlock2 = node2.blockchain.minePendingTransactions('0x006325d2e4fe');
     node2.sendBlock(newBlock2);
+
+    //Simulando Fork
+    //node3.receiveBlock(newBlock2);
 }
 
 function displayBlockchain(node){
