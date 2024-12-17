@@ -174,6 +174,14 @@ addTransaction(transaction) {
 }
 ```
 ### 4. Adicionar taxas de transação e recompensas para mineradores.
+- Uma taxa fixa no valor 3 foi por transação foi adicionada, sendo descontada e direcionada ao minerador do bloco.
+```javascript
+class Transaction {
+  constructor(sender, receiver, amount) {
+    this.fee = 3;
+    ...
+  }  
+```
 - Foi adicionado um valor de recompensa, na blockchain, que inicia com 100 e é reduzido pela metade a cada bloco minerado. Na função `minePendingTransactions`, é criada uma transação que atribui a recompensa, somando com o total das taxas de todas as transações pendentes, ao endereço informado. O remetente é definido como null. Após a mineração do bloco, as transações são processadas, e a lista de saldos é atualizada com os valores correspondentes.
   
 ```javascript
