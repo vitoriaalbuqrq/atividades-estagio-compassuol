@@ -1,5 +1,5 @@
 # Simple Blockchain 
-
+Este projeto é uma simulação de uma blockchain simples que demonstra o funcionamento básico da rede, incluindo a realização de transações, o processo de mineração e consenso entre os "nós" participantes.
 
 ## 🛠️ Pré-requisitos
 É necessario ter o [Node.js](https://nodejs.org/) instalado para executar o projeto.
@@ -174,7 +174,7 @@ addTransaction(transaction) {
 }
 ```
 ### 4. Adicionar taxas de transação e recompensas para mineradores.
-- Uma taxa fixa no valor 3 foi por transação foi adicionada, sendo descontada e direcionada ao minerador do bloco.
+- Uma taxa fixa no valor 3 por transação foi adicionada para ser descontada no saldo do remetente da transação e direcionada ao minerador do bloco.
 ```javascript
 class Transaction {
   constructor(sender, receiver, amount) {
